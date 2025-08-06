@@ -6,16 +6,15 @@
   <link rel="stylesheet" href="/static/style.css" />
 </head>
 <body class="artist-page-bg {{if eq .Artist.ID 21}}blur-background{{end}}" style="background-image: url('{{ .Artist.Image }}');">
-  <header class="site-header">
-    <h1 class="main-title">Groupie Tracker</h1>
-    <nav class="nav-centered">
-      <ul class="nav-list">
-        <li><a href="/">Home</a></li>
-        <li><a href="/aboutus">About Us</a></li>
-      </ul>
-    </nav>
-  </header>
-
+<header class="site-header" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; color: white;">
+  <h1 class="main-title" style="margin: 0;">Groupie Tracker</h1>
+  <nav class="nav-centered">
+    <ul class="nax-list" style="list-style: none; display: flex; gap: 1rem; margin: 0; padding: 0;">
+      <li><a href="/" style="color: white; text-decoration: none;">Home</a></li>
+      <li><a href="/aboutus" style="color: white; text-decoration: none;">About Us</a></li>
+    </ul>
+  </nav>
+</header>
   <h1>{{ .Artist.Name }}</h1>
 
   <main class="artist-container">
