@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Artists | Groupie Tracker</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1>Artists</h1>
+    <nav>
+      <ul class="nav-list">
+        <li><a href="/">Home</a></li>
+        <!-- <li><a href="/artists">Artists</a></li> -->
+        <li><a href="/aboutus">About Us</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="container artists-grid">
+    {{ range .Artists }}
+      <article class="artist-card">
+        <a href="/submit?value={{ .ID }}">
+          <img src="{{ .Image }}" alt="{{ .Name }}" class="{{if eq .ID 21}}blurred-img{{end}}"> 
+          <h2>{{ .Name }}</h2>
+        </a>
+      </article>
+    {{ end }}
+  </main>
+  <footer class="site-footer">
+    <p>&copy; 2025 Groupie Tracker &mdash; Crafted with passion</p>
+  </footer>
+</body>
+</html>
