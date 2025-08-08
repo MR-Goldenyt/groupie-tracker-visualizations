@@ -5,67 +5,70 @@
   <title>{{ .Artist.Name }} | Groupie Tracker</title>
   <link rel="stylesheet" href="/static/style.css" />
 </head>
-<body class="artist-page-bg {{if eq .Artist.ID 21}}blur-background{{end}}" style="background-image: url('{{ .Artist.Image }}');">
-<header class="site-header" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; color: white;">
-  <h1 class="main-title" style="margin: 0;">Groupie Tracker</h1>
-  <nav class="nav-centered">
-    <ul class="nax-list" style="list-style: none; display: flex; gap: 1rem; margin: 0; padding: 0;">
-      <li><a href="/" style="color: white; text-decoration: none;">Home</a></li>
-      <li><a href="/aboutus" style="color: white; text-decoration: none;">About Us</a></li>
-    </ul>
-  </nav>
-</header>
-  <h1>{{ .Artist.Name }}</h1>
-
-  <main class="artist-container">
-    <!-- Small image -->
-  <div class="artist-thumbnail">
-  <img src="{{ .Artist.Image }}" alt="{{ .Artist.Name }}" class="{{if eq .Artist.ID 21}}blurred-img{{end}}" />
-</div>
-
-
-    <!-- Artist Info -->
-    <section class="artist-info">
-      <h2>Artist Info</h2>
-      <p><strong>🎵 First Album:</strong> {{ .Artist.FirstAlbum }}</p>
-      <p><strong>📅 Creation Date:</strong> {{ .Artist.CreationDate }}</p>
-      <p><strong>👥 Members:</strong></p>
-      <ul>
-        {{ range .Artist.Members }}
-          <li>{{ . }}</li>
-        {{ end }}
+<body class="artist-page-bg blur-background" style="background-image: url('{{ .Artist.Image }}');">
+  <header class="site-header">
+    <h1 class="main-title unselectable" style="margin: 0;">Groupie Tracker</h1>
+    <nav class="nav-centered">
+      <ul class="nav-list" style="list-style: none; display: flex; gap: 1rem; margin: 0; padding: 0;">
+        <li><a class="unselectable" href="/">Home</a></li>
+        <li><a class="unselectable" href="/aboutus">About Us</a></li>
       </ul>
-    </section>
+    </nav>
+  </header>
 
-    <!-- Tour Table -->
-    <section class="artist-tour">
-      <h2>Tour Dates & Locations</h2>
-      <table class="tour-table">
-        <thead>
-          <tr>
-            <th>Location</th>
-            <th>Dates</th>
-          </tr>
-        </thead>
-        <tbody>
-          {{ range .LocDateList }}
-          <tr>
-            <td>{{ .Location }}</td>
-            <td>
-              {{ range $index, $date := .Dates }}
-                {{ if $index }}, {{ end }}{{ $date }}
+  <div class="wrapper">
+    <main class="artist-container content" style="margin-top: 2%; margin-bottom: 2%;">
+      <div class="artist-header">
+        <div class="artist-thumbnail-container unselectable">
+          <img id="id{{ .Artist.ID }}" src="{{ .Artist.Image }}" loading="lazy" alt="{{ .Artist.Name }}" />
+          <div class="artist-overlay">
+            <h1>{{ .Artist.Name }}</h1>
+          </div>
+        </div>
+      </div>
+      <!-- Tour Table -->
+        <section class="artist-tour right">
+          <h2>Tour Dates & Locations</h2>
+          <table class="tour-table">
+            <thead>
+              <tr>
+                <th>Location</th>
+                <th>Dates</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{ range .LocDateList }}
+              <tr>
+                <td>{{ .Location }}</td>
+                <td>
+                  {{ range $index, $date := .Dates }}
+                    {{ if $index }}, {{ end }}{{ $date }}
+                  {{ end }}
+                </td>
+              </tr>
               {{ end }}
-            </td>
-          </tr>
-          {{ end }}
-        </tbody>
-      </table>
-    </section>
-  </main>
+            </tbody>
+          </table>
+        </section>
+      <div class="artist-body">
+        <!-- Artist Info -->
+        <section class="artist-info">
+          <h2>Artist Info</h2>
+          <p><strong>🎵 First Album:</strong> {{ .Artist.FirstAlbum }}</p>
+          <p><strong>📅 Creation Date:</strong> {{ .Artist.CreationDate }}</p>
+          <p><strong>👥 Members:</strong></p>
+          <ul>
+            {{ range .Artist.Members }}
+              <li>{{ . }}</li>
+            {{ end }}
+          </ul>
+        </section>
+      </div>
+      <p><a class="back-link unselectable" href="/">← Back to Artists</a></p>
+    </main>
+  </div>
 
-  <a class="back-link" href="/">← Back to Artists</a>
-
-  <footer class="site-footer">
+  <footer class="site-footer unselectable uninteractable">
     <p>&copy; 2025 Groupie Tracker &mdash; Crafted with passion</p>
   </footer>
 </body>

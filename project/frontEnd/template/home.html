@@ -6,12 +6,12 @@
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-<header class="site-header" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem; color: white;">
-  <h1 class="main-title" style="margin: 0;">Groupie Tracker</h1>
+<header class="site-header">
+  <h1 class="main-title unselectable" style="margin: 0;">Groupie Tracker</h1>
   <nav class="nav-centered">
-    <ul class="nax-list" style="list-style: none; display: flex; gap: 1rem; margin: 0; padding: 0;">
-      <li><a href="/" style="color: white; text-decoration: none;">Home</a></li>
-      <li><a href="/aboutus" style="color: white; text-decoration: none;">About Us</a></li>
+    <ul class="nav-list" style="list-style: none; display: flex; gap: 1rem; margin: 0; padding: 0;">
+      <li><a class="unselectable" href="/">Home</a></li>
+      <li><a class="unselectable" href="/aboutus">About Us</a></li>
     </ul>
   </nav>
 </header>
@@ -19,20 +19,22 @@
  
   <main class="container artists-grid">
     {{ range .Artists }}
-      <article class="artist-card">
+      <article class="artist-card unselectable">
         <a href="/submit?value={{ .ID }}">
           <div class="artist-img-wrapper">
-            <img src="{{ .Image }}" alt="{{ .Name }}" class="{{if eq .ID 21}}blurred-img{{end}}">
+            <img id="id{{ .ID }}" src="{{ .Image }}" alt="{{ .Name }}" loading="lazy" class="unselectable uninteractable">
           </div>
-          <h2 class="artist-name">{{ .Name }}</h2>
+          <div class="artist-name">
+            <h2>{{ .Name }}</h2>
+          </div>
         </a>
       </article>
     {{ end }}
   </main>
  
-  <footer class="site-footer">
-    <p>&copy; 2025 Groupie Tracker &mdash; Crafted with passion</p>
-  </footer>
+<footer class="site-footer unselectable uninteractable">
+  <p>&copy; 2025 Groupie Tracker &mdash; Crafted with passion</p>
+</footer>
 </body>
 </html>
  
