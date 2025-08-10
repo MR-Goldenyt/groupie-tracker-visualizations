@@ -60,24 +60,32 @@ func AssetHandler() http.Handler {
 
 // handleSubmit processes the /submit route, validating the 'value' parameter and rendering the artist page.
 func handleSubmit(w http.ResponseWriter, r *http.Request, artists []project.Artist) {
-	if r.Method != http.MethodGet {
-		helpers.ServeError(w,r, http.StatusMethodNotAllowed)
-		return
-	}
+    if r.Method != http.MethodGet {
+        helpers.ServeError(w, r, http.StatusMethodNotAllowed)
+        return
+    }
 
-	valueStr := r.URL.Query().Get("value")
-	idx, err := strconv.Atoi(valueStr)
-	if err != nil {
-		helpers.ServeError(w, r, http.StatusBadRequest)
-		return
-	} else if idx < 1 || idx > len(artists) {
-		helpers.ServeError(w, r, http.StatusNotFound)
-		return
-	}
+    valueStr := r.URL.Query().Get("value")
+    idx, err := strconv.Atoi(valueStr)
+    if err != nil {
+        helpers.ServeError(w, r, http.StatusBadRequest)
+        return
+    } else if idx < 1 || idx > len(artists) {
+        helpers.ServeError(w, r, http.StatusNotFound)
+        return
+    }
 
-	pageData := project.PageDataArtist{
-		Artist:      artists[idx-1],
-		LocDateList: helpers.BuildLocationDateList(idx - 1),
-	}
-	helpers.RenderTemplate(w, r, "frontEnd/template/artist.html", pageData)
+    // 🔄 Add this block to compute previous and next artist IDs with wraparound
+    prevIdx := (idx - 2 + len(artists)) % len(artists) + 1
+    nextIdx := idx % len(artists) + 1
+
+    // ✅ Include PrevID and NextID in the page data
+    pageData := project.PageDataArtist{
+        Artist:      artists[idx-1],
+        LocDateList: helpers.BuildLocationDateList(idx - 1),
+        PrevID:      prevIdx,
+        NextID:      nextIdx,
+    }
+
+    helpers.RenderTemplate(w, r, "frontEnd/template/artist.html", pageData)
 }

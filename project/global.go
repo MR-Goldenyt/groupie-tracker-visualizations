@@ -18,6 +18,8 @@ type PageData struct {
 type PageDataArtist struct {
 	Artist      Artist
 	LocDateList []LocDate
+	PrevID      int
+    NextID      int
 }
 
 // Artist represents the structure of each artist returned by the /api/artists endpoint.

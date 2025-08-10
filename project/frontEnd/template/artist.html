@@ -36,19 +36,46 @@
                 <th>Dates</th>
               </tr>
             </thead>
-            <tbody>
-              {{ range .LocDateList }}
-              <tr>
-                <td>{{ .Location }}</td>
-                <td>
-                  {{ range $index, $date := .Dates }}
-                    {{ if $index }}, {{ end }}{{ $date }}
-                  {{ end }}
-                </td>
-              </tr>
-              {{ end }}
-            </tbody>
+           {{ if gt (len .LocDateList) 4 }}
+  <input type="checkbox" id="toggle-locs" class="toggle-checkbox">
+
+  <tbody>
+    {{ range $i, $loc := .LocDateList }}
+      <tr class="{{ if ge $i 4 }}extra{{ end }}">
+        <td>{{ $loc.Location }}</td>
+        <td>
+          {{ range $index, $date := $loc.Dates }}
+            {{ if $index }}, {{ end }}{{ $date }}
+          {{ end }}
+        </td>
+      </tr>
+    {{ end }}
+  </tbody>
+{{ else }}
+  <tbody>
+    {{ range .LocDateList }}
+      <tr>
+        <td>{{ .Location }}</td>
+        <td>
+          {{ range $index, $date := .Dates }}
+            {{ if $index }}, {{ end }}{{ $date }}
+          {{ end }}
+        </td>
+      </tr>
+    {{ end }}
+  </tbody>
+{{ end }}
+
+
           </table>
+         {{ if gt (len .LocDateList) 4 }}
+  <div class="toggle-controls">
+    <label for="toggle-locs" class="toggle-label show">Show more</label>
+    <label for="toggle-locs" class="toggle-label hide">Show less</label>
+  </div>
+{{ end }}
+
+
         </section>
       <div class="artist-body">
         <!-- Artist Info -->
@@ -65,6 +92,11 @@
         </section>
       </div>
       <p><a class="back-link unselectable" href="/">← Back to Artists</a></p>
+      <div class="nav-arrows">
+    <a href="/submit?value={{.PrevID}}" class="arrow left">&#8592;</a>
+    <a href="/submit?value={{.NextID}}" class="arrow right">&#8594;</a>
+</div>
+
     </main>
   </div>
 

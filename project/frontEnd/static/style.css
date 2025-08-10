@@ -11,7 +11,7 @@
 
 /* Global Reset */
 * {
-  box-sizing: border-box;
+  box-sizing: border-box; 
   margin: 0;
   padding: 0;
 }
@@ -319,8 +319,10 @@ h1 {
 .artist-container {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  grid-template-rows: min-content auto; /* first row takes height of content, second row fills rest */
-  gap: 3rem;
+  grid-template-rows: 320px auto;
+/* first row takes height of content, second row fills rest */
+  column-gap: 3rem;
+  row-gap: 2rem;
   padding: 3rem;
   padding-bottom: 2rem;
   max-width: 60%;
@@ -694,4 +696,73 @@ img#id21 {
   h1 { font-size: 2rem; }
   .artist-header > h1 { font-size: 2.2rem; }
   .artist-overlay h1 { font-size: 1.1rem; }
+}
+.nav-arrows {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transform: translateY(-50%);
+    pointer-events: none; /* allows clicks to pass through if needed */
+    z-index: 1000;
+}
+
+.arrow {
+    pointer-events: auto; /* re-enable clicks on arrows */
+    font-size: 2rem;
+    text-decoration: none;
+    color: #333;
+    background-color: #f0f0f0;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+.arrow:hover {
+    background-color: #ddd;
+}
+
+.toggle-checkbox {
+  display: none;
+}
+
+.tour-table .extra {
+  display: none;
+}
+
+.toggle-checkbox:checked ~ .tour-table .extra {
+  display: table-row;
+}
+
+.toggle-controls {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.toggle-label {
+  display: inline-block;
+  color: var(--accent-color);
+  cursor: pointer;
+  font-weight: 500;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+  margin: 0 0.5rem;
+}
+
+.toggle-label:hover {
+  color: #93c5fd;
+}
+
+.toggle-label.hide {
+  display: none;
+}
+
+.toggle-checkbox:checked ~ .toggle-controls .show {
+  display: none;
+}
+
+.toggle-checkbox:checked ~ .toggle-controls .hide {
+  display: inline-block;
 }
