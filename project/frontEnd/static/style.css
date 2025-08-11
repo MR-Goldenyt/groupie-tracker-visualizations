@@ -143,8 +143,7 @@ h1, h2, h3 {
 }
 .artist-card:hover {
   transform: scale(1.03);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.5);
-}
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.7), 0 0 30px rgba(59, 130, 246, 0.5);}
 .artist-card img {
   width: 100%;
   display: block;
@@ -484,6 +483,13 @@ h1 {
   box-shadow: 0 4px 10px rgba(0,0,0,0.4);
 }
 
+.creator-box:hover {
+  box-shadow: 0 0 15px rgba(59, 130, 246, 0.7), 
+              0 0 30px rgba(59, 130, 246, 0.5);
+  transform: scale(1.03);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
 .artist-page-bg.blur-background::before {
   background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(25px);
@@ -561,7 +567,6 @@ img#id21 {
 
 .wrapper {
   flex: 1;
-  display: flex;
   flex-direction: column;
   width: 100%;
   margin: auto auto;
@@ -697,31 +702,46 @@ img#id21 {
   .artist-header > h1 { font-size: 2.2rem; }
   .artist-overlay h1 { font-size: 1.1rem; }
 }
+
 .nav-arrows {
-    position: fixed;
-    top: 50%;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transform: translateY(-50%);
-    pointer-events: none; /* allows clicks to pass through if needed */
-    z-index: 1000;
+  position: fixed;
+  top: 50%;
+  left: 0; right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 1000;
 }
 
 .arrow {
-    pointer-events: auto; /* re-enable clicks on arrows */
-    font-size: 2rem;
-    text-decoration: none;
-    color: #333;
-    background-color: #f0f0f0;
-    padding: 0.5rem;
-    border-radius: 50%;
-    transition: background-color 0.3s;
+  pointer-events: auto;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(59,130,246,.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,.45);
+  transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+  color: white; /* sets SVG stroke color */
 }
+
+.arrow img {
+  width: 60%;
+  height: auto;
+}
+
+.arrow-left img {
+  transform: rotate(180deg); /* flips the right arrow to left */
+}
+
 .arrow:hover {
-    background-color: #ddd;
+  transform: scale(1.1);
+  background: rgba(59,130,246,1);
+  box-shadow: 0 0 16px rgba(59,130,246,.7), 0 0 28px rgba(59,130,246,.5);
 }
 
 .toggle-checkbox {

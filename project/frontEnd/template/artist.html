@@ -92,9 +92,13 @@
         </section>
       </div>
       <p><a class="back-link unselectable" href="/">← Back to Artists</a></p>
-      <div class="nav-arrows">
-    <a href="/submit?value={{.PrevID}}" class="arrow left">&#8592;</a>
-    <a href="/submit?value={{.NextID}}" class="arrow right">&#8594;</a>
+      <div class="nav-arrows" aria-label="Artist navigation">
+  <a href="/submit?value={{ .PrevID }}" class="arrow arrow-left" aria-label="Previous artist">
+    <img src="/static/icons/arrow.svg" alt="">
+  </a>
+  <a href="/submit?value={{ .NextID }}" class="arrow arrow-right" aria-label="Next artist">
+    <img src="/static/icons/arrow.svg" alt="">
+  </a>
 </div>
 
     </main>

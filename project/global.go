@@ -6,7 +6,7 @@ import (
 
 const API = "https://groupietrackers.herokuapp.com/api"
 
-//go:embed frontEnd/template/*.html frontEnd/static/*.css
+//go:embed frontEnd/template/*.html frontEnd/static/*.css frontEnd/static/icons/*.svg
 var StaticFS embed.FS
 
 // PageData holds the list of all artists for the index template.
