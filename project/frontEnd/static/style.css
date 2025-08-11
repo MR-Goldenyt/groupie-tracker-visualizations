@@ -566,13 +566,15 @@ img#id21 {
 }
 
 .wrapper {
-  flex: 1;
-  flex-direction: column;
-  width: 100%;
-  margin: auto auto;
-  margin-top: 1%;
-  margin-bottom: 1%;
-  padding: 0 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100svh - 120px);
+  padding-block: clamp(12px, 5vh, 48px);
+  width: 100%;            /* <- ensure full width */
+  max-width: none;        /* <- don’t cap it */
+  margin: 0;              /* <- no auto-centering margins */
+  box-sizing: border-box;
 }
 
 .right {
@@ -607,7 +609,7 @@ img#id21 {
 /*  Tablet: <= 1024px         */
 /* ========================== */
 @media (max-width: 1024px) {
-  .container, .wrapper { max-width: 90%; }
+  .container { max-width: 90%; }
 
   .nav-centered .nav-list {
     gap: 1rem;
@@ -631,7 +633,7 @@ img#id21 {
 /*  Mobile: <= 768px          */
 /* ========================== */
 @media (max-width: 768px) {
-  .container, .wrapper { max-width: 94%; padding: 0 0.75rem; }
+  .container { max-width: 94%; padding: 0 0.75rem; }
 
   .site-header {
     flex-direction: column;
@@ -645,10 +647,19 @@ img#id21 {
     flex-wrap: wrap;
   }
 
-  .artists-grid {
-    grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
-    gap: 1rem;
-    padding: 1rem 0;
+  .artist-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    /* grid-template-rows: 320px auto;  <-- remove this */
+    grid-auto-rows: auto;             /* let rows size to content */
+    column-gap: 3rem;
+    row-gap: 2rem;
+    padding: 3rem;
+    max-width: 60%;
+    margin: 0 auto;
+    background-color: rgba(0,0,0,0.4);
+    border-radius: 20px;
+    overflow: visible;                 /* don’t clip the card’s shadow */
   }
 
   .artist-container {
@@ -662,7 +673,7 @@ img#id21 {
     grid-row: auto;
   }
   .artist-header { justify-self: center; }
-  .artist-thumbnail { max-width: 300px; }
+  .artist-thumbnail { max-height: 320px; width: 100%; object-fit: cover; }
 
   .artist-info { gap: 0.4rem; }
 
