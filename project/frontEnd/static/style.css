@@ -65,6 +65,12 @@ a:hover {
   padding: 1rem 2rem;
 }
 
+.site-header{
+  position: sticky;
+  top: 0;
+  z-index: 100;  /* above cards/shadows */
+}
+
 .nav-centered .nav-list {
   display: flex;
   justify-content: center;
@@ -290,9 +296,10 @@ body.artist-page-bg {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  color: #93c5fd; /* subtle accent text for this context */
-  height: 100vh;
-  overflow: auto;
+  color: #93c5fd;            /* subtle accent text for this context */
+  min-height: 100dvh;        /* was height: 100vh */
+  overflow-x: hidden;        /* avoid accidental horizontal scroll */
+  overflow-y: auto;
   position: relative;
 }
 
@@ -569,11 +576,11 @@ img#id21 {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100svh - 120px);
+  min-height: calc(100dvh - 120px);  /* was 100svh */
   padding-block: clamp(12px, 5vh, 48px);
-  width: 100%;            /* <- ensure full width */
-  max-width: none;        /* <- don’t cap it */
-  margin: 0;              /* <- no auto-centering margins */
+  width: 100%;
+  max-width: none;
+  margin: 0;
   box-sizing: border-box;
 }
 
@@ -628,6 +635,17 @@ img#id21 {
   }
   .artist-tour { min-width: unset; }
 }
+
+/* When the viewport is short, don't center vertically */
+@media (max-height: 620px){
+  .wrapper{
+    align-items: stretch;       /* stop vertical centering */
+    justify-content: flex-start;
+    min-height: auto;           /* let content flow from under the header */
+    padding-block: 12px;        /* tighter breathing room */
+  }
+}
+
 
 /* ========================== */
 /*  Mobile: <= 768px          */
