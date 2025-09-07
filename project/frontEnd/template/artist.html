@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{{ .Artist.Name }} | Groupie Tracker</title>
   <link rel="stylesheet" href="/static/style.css" />
 </head>
 
+
 <body class="artist-page-bg blur-background" style="background-image: url('{{ .Artist.Image }}');">
   <header class="site-header">
-    <h1 class="main-title unselectable" style="margin: 0;">Groupie Tracker</h1>
+    <h1 class="main-title unselectable">Groupie Tracker</h1>
     <nav class="nav-centered">
       <ul class="nav-list" style="list-style: none; display: flex; gap: 1rem; margin: 0; padding: 0;">
         <li><a class="unselectable" href="/">Home</a></li>
@@ -76,7 +77,7 @@
   </div>
 
   <footer class="site-footer unselectable uninteractable">
-    <p>&copy; 2025 Groupie Tracker &mdash; Crafted with passion</p>
+    <p>&copy; 2025 Groupie Tracker</p>
   </footer>
 </body>
 
