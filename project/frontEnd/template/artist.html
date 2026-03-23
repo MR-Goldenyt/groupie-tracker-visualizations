@@ -2,12 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{{ .Artist.Name }} | Groupie Tracker</title>
   <link rel="stylesheet" href="/static/style.css" />
 </head>
+
+
 <body class="artist-page-bg blur-background" style="background-image: url('{{ .Artist.Image }}');">
   <header class="site-header">
-    <h1 class="main-title unselectable" style="margin: 0;">Groupie Tracker</h1>
+    <h1 class="main-title unselectable">Groupie Tracker</h1>
     <nav class="nav-centered">
       <ul class="nav-list" style="list-style: none; display: flex; gap: 1rem; margin: 0; padding: 0;">
         <li><a class="unselectable" href="/">Home</a></li>
@@ -17,95 +20,65 @@
   </header>
 
   <div class="wrapper">
-    <main class="artist-container content" style="margin-top: 2%; margin-bottom: 2%;">
-      <div class="artist-header">
-        <div class="artist-thumbnail-container unselectable">
-          <img id="id{{ .Artist.ID }}" src="{{ .Artist.Image }}" loading="lazy" alt="{{ .Artist.Name }}" />
-          <div class="artist-overlay">
-            <h1>{{ .Artist.Name }}</h1>
+    <main class="artist-container">
+      <div class="left">
+        <div class="artist-header">
+          <div class="artist-thumbnail-container unselectable">
+            <img id="id{{ .Artist.ID }}" src="{{ .Artist.Image }}" loading="lazy" alt="{{ .Artist.Name }}" />
+            <div class="artist-overlay">
+              <h1>{{ .Artist.Name }}</h1>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- Tour Table -->
-        <section class="artist-tour right">
-          <h2>Tour Dates & Locations</h2>
-          <table class="tour-table">
-            <thead>
-              <tr>
-                <th>Location</th>
-                <th>Dates</th>
-              </tr>
-            </thead>
-           {{ if gt (len .LocDateList) 4 }}
-  <input type="checkbox" id="toggle-locs" class="toggle-checkbox">
 
-  <tbody>
-    {{ range $i, $loc := .LocDateList }}
-      <tr class="{{ if ge $i 4 }}extra{{ end }}">
-        <td>{{ $loc.Location }}</td>
-        <td>
-          {{ range $index, $date := $loc.Dates }}
-            {{ if $index }}, {{ end }}{{ $date }}
-          {{ end }}
-        </td>
-      </tr>
-    {{ end }}
-  </tbody>
-{{ else }}
-  <tbody>
-    {{ range .LocDateList }}
-      <tr>
-        <td>{{ .Location }}</td>
-        <td>
-          {{ range $index, $date := .Dates }}
-            {{ if $index }}, {{ end }}{{ $date }}
-          {{ end }}
-        </td>
-      </tr>
-    {{ end }}
-  </tbody>
-{{ end }}
-
-
-          </table>
-         {{ if gt (len .LocDateList) 4 }}
-  <div class="toggle-controls">
-    <label for="toggle-locs" class="toggle-label show">Show more</label>
-    <label for="toggle-locs" class="toggle-label hide">Show less</label>
-  </div>
-{{ end }}
-
-
-        </section>
-      <div class="artist-body">
-        <!-- Artist Info -->
-        <section class="artist-info">
-          <h2>Artist Info</h2>
-          <p><strong>🎵 First Album:</strong> {{ .Artist.FirstAlbum }}</p>
-          <p><strong>📅 Creation Date:</strong> {{ .Artist.CreationDate }}</p>
-          <p><strong>👥 Members:</strong></p>
-          <ul>
-            {{ range .Artist.Members }}
+        <div class="artist-body">
+          <section class="artist-info">
+            <h2>Artist Info</h2>
+            <p><strong>🎵 First Album:</strong> {{ .Artist.FirstAlbum }}</p>
+            <p><strong>📅 Creation Date:</strong> {{ .Artist.CreationDate }}</p>
+            <p><strong>👥 Members:</strong></p>
+            <ul>
+              {{ range .Artist.Members }}
               <li>{{ . }}</li>
-            {{ end }}
-          </ul>
-        </section>
+              {{ end }}
+            </ul>
+          </section>
+        </div>
       </div>
-      <p><a class="back-link unselectable" href="/">← Back to Artists</a></p>
-      <div class="nav-arrows" aria-label="Artist navigation">
-  <a href="/submit?value={{ .PrevID }}" class="arrow arrow-left" aria-label="Previous artist">
-    <img src="/static/icons/arrow.svg" alt="">
-  </a>
-  <a href="/submit?value={{ .NextID }}" class="arrow arrow-right" aria-label="Next artist">
-    <img src="/static/icons/arrow.svg" alt="">
-  </a>
-</div>
 
+      <section class="artist-tour">
+        <h2>Tour Dates & Locations</h2>
+        <table class="tour-table">
+          <thead>
+            <tr>
+              <th>Location</th>
+              <th>Dates</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{ range .LocDateList }}
+            <tr>
+              <td>{{ .Location }}</td>
+              <td>
+                {{ range $index, $date := .Dates }}
+                {{ if $index }}, {{ end }}{{ $date }}
+                {{ end }}
+              </td>
+            </tr>
+            {{ end }}
+          </tbody>
+        </table>
+      </section>
     </main>
+
+    <p class="back-link-wrapper">
+      <a class="back-link unselectable" href="/">← Back to Artists</a>
+    </p>
   </div>
 
   <footer class="site-footer unselectable uninteractable">
-    <p>&copy; 2025 Groupie Tracker &mdash; Crafted with passion</p>
+    <p>&copy; 2025 Groupie Tracker</p>
   </footer>
 </body>
+
 </html>
